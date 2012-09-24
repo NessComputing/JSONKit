@@ -635,8 +635,8 @@ static NSNumberInitWithUnsignedLongLongImp _jk_NSNumberInitWithUnsignedLongLongI
 extern void jk_collectionClassLoadTimeInitialization(void) __attribute__ ((constructor));
 
 void jk_collectionClassLoadTimeInitialization(void) {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Though technically not required, the run time environment at load time initialization may be less than ideal.
-  
+    @autoreleasepool {
+        
   _JKArrayClass             = objc_getClass("JKArray");
   _JKArrayInstanceSize      = jk_max(16UL, class_getInstanceSize(_JKArrayClass));
   
@@ -653,7 +653,7 @@ void jk_collectionClassLoadTimeInitialization(void) {
   [[temp_NSNumber init] release];
   temp_NSNumber = NULL;
   
-  [pool release]; pool = NULL;
+    }
 }
 
 
